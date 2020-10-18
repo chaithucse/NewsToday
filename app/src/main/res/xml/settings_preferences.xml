@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="Application Settings">
+
+        <ListPreference
+            android:defaultValue="United States"
+            android:entries="@array/country_list_entries"
+            android:entryValues="@array/country_list_values"
+            android:summary="United States"
+            app:key="country"
+            app:title="Select country" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="General">
+        <Preference
+            app:key="version"
+            app:summary="1.0.0.00"
+            app:title="Application Version" />
+        <Preference
+            app:key="share"
+            app:summary="Share app with friends and Families"
+            app:title="Share" />
+        <Preference
+            app:key="feedback"
+            app:summary="Report technical issues or suggest new features"
+            app:title="Send feedback" />
+        <Preference
+            app:key="apps"
+            app:title="More Apps" />
+        <Preference
+            android:key="api"
+            android:summary="News content is from NewsAPI source"
+            android:title="Powered by NewsAPI" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,4 +1,4 @@
-# NewToday
+# News Today
 News Application which fetches content using REST API
 
 

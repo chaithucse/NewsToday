@@ -1,4 +1,4 @@
-package com.techchai.newstoday.view
+package com.techchai.newstoday.view.headlines
 
 import android.content.Context
 import android.content.Intent
@@ -13,10 +13,15 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.techchai.newstoday.R
 import com.techchai.newstoday.common.AppConstants
+import com.techchai.newstoday.view.search.SearchActivity
+import com.techchai.newstoday.view.settings.SettingsFragment
+import com.techchai.newstoday.view.sources.SourcesFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author Chaitanya
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     lateinit var toolbar: Toolbar
     lateinit var sharedPreferences: SharedPreferences

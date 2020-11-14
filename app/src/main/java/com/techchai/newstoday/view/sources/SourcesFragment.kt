@@ -1,4 +1,4 @@
-package com.techchai.newstoday.view
+package com.techchai.newstoday.view.sources
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.techchai.newstoday.R
+import dagger.hilt.android.AndroidEntryPoint
 
 class SourcesFragment : Fragment() {
 

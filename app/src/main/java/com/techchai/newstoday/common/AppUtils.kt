@@ -7,12 +7,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -26,14 +20,9 @@ class AppUtils {
 
     companion object {
         fun isNetworkAvailable(context: Context): Boolean {
-/*            val cm: ConnectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkInfo: NetworkInfo = cm.getActiveNetworkInfo()
-            return networkInfo.isAvailable() && networkInfo.isConnected()*/
             val service = Context.CONNECTIVITY_SERVICE
             val manager = context.getSystemService(service) as ConnectivityManager?
             val network = manager?.activeNetworkInfo
-            Log.d("", "hasNetworkAvailable: ${(network != null)}")
             return (network?.isConnected) ?: false
         }
 
@@ -98,7 +87,7 @@ class AppUtils {
             }
         }
 
-        fun getPackageVersion(context: FragmentActivity?) : String {
+        fun getPackageVersion(context: FragmentActivity?): String {
             try {
                 val pInfo: PackageInfo =
                     context!!.packageManager.getPackageInfo(context.getPackageName(), 0)

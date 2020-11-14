@@ -7,6 +7,7 @@ import com.techchai.newstoday.common.AppUtils
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -55,10 +56,10 @@ class ApiClient {
             }
 
             //Creating Auth Interceptor to add api_key query in front of all the requests.
-            val authInterceptor = Interceptor {chain->
+            val authInterceptor = Interceptor { chain ->
                 val newUrl = chain.request().url()
                     .newBuilder()
-                    .addQueryParameter("apiKey", "7b7b069ede844ae692b76ca98f2b78bc")
+                    .addQueryParameter("apiKey", BuildConfig.API_KEY)
                     .build()
 
                 val newRequest = chain.request()
@@ -78,6 +79,7 @@ class ApiClient {
 
             instance = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

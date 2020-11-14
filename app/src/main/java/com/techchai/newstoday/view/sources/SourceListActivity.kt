@@ -1,7 +1,8 @@
-package com.techchai.newstoday.view
+package com.techchai.newstoday.view.sources
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -9,10 +10,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techchai.newstoday.R
-import com.techchai.newstoday.data.model.Headlines
+import com.techchai.newstoday.data.model.NewsHeadlines
+import com.techchai.newstoday.view.NewsAdapter
 import com.techchai.newstoday.viewmodel.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SourceListActivity : AppCompatActivity() {
+
+    val newsViewModel by viewModels<NewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +39,9 @@ class SourceListActivity : AppCompatActivity() {
         listView.layoutManager = LinearLayoutManager(this)
         listView.adapter = adapter
 
-        val coinViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-
-        coinViewModel.getNewsFromSources(sourceID)!!.observe(
+        newsViewModel.getNewsFromSources(sourceID)!!.observe(
             this,
-            Observer { coinNews: List<Headlines> -> adapter.setData(coinNews) })
+            Observer { sourcenews: NewsHeadlines -> adapter.setData(sourcenews.articles) })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

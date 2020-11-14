@@ -1,4 +1,4 @@
-package com.techchai.newstoday.view
+package com.techchai.newstoday.view.search
 
 import android.content.Context
 import android.graphics.PorterDuff
@@ -7,23 +7,31 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techchai.newstoday.R
-import com.techchai.newstoday.data.model.Headlines
+import com.techchai.newstoday.data.model.NewsHeadlines
+import com.techchai.newstoday.view.NewsAdapter
 import com.techchai.newstoday.viewmodel.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Search news activity
+ * @author Chaitanya
+ */
+
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
-
-    lateinit var listView: RecyclerView
-    lateinit var adapter: NewsAdapter
-    lateinit var searchView: EditText
-
-    private lateinit var coinViewModel: NewsViewModel
+    private lateinit var listView: RecyclerView
+    private lateinit var adapter: NewsAdapter
+    private lateinit var searchView: EditText
+    val newsViewModel by viewModels<NewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +42,20 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.navigationIcon!!.setColorFilter(resources.getColor(R.color.textColorPrimary), PorterDuff.Mode.SRC_ATOP)
+        toolbar.navigationIcon!!.setColorFilter(
+            resources.getColor(R.color.textColorPrimary),
+            PorterDuff.Mode.SRC_ATOP
+        )
 
         searchView = findViewById(R.id.search_query)
         searchView.requestFocus()
 
         adapter = NewsAdapter(this)
-        coinViewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
 
         searchView.setOnEditorActionListener { v, actionId, event ->
-            coinViewModel.getSearchResults(v.text.toString().trim())!!.observe(
+            newsViewModel.getSearchResults(v.text.toString().trim())!!.observe(
                 this,
-                Observer { coinNews: List<Headlines> -> adapter.setData(coinNews) })
+                Observer { searchResults: NewsHeadlines -> adapter.setData(searchResults.articles) })
             searchView.hideKeyboard()
             true
         }
@@ -62,12 +72,14 @@ class SearchActivity : AppCompatActivity() {
 
     fun View.showKeyboard() {
         this.requestFocus()
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_FORCED)
     }
 
     fun View.hideKeyboard() {
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 

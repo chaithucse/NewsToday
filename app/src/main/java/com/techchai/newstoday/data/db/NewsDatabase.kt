@@ -16,14 +16,10 @@ import com.techchai.newstoday.data.model.SourceTypeConverter
 @Database(entities = arrayOf(Headlines::class, Source::class), version = 1)
 @TypeConverters(SourceTypeConverter::class)
 abstract class NewsDatabase : RoomDatabase() {
-
     abstract fun newsDao(): NewsDAO
-
     companion object {
         private var instance: NewsDatabase? = null
-
         fun getDatabase(context: Context): NewsDatabase? {
-
             if (null == instance) {
                 synchronized(NewsDatabase::class.java) {
                     instance = Room.databaseBuilder(context, NewsDatabase::class.java, "news.db").build()

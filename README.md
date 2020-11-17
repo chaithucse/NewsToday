@@ -1,5 +1,5 @@
 # News Today
-News Today application is a simple application built using [Modern Android Development](https://developer.android.com/modern-android-development) patterns.
+[News Today](https://play.google.com/store/apps/details?id=com.techchai.newstoday) application is a simple application built using [Modern Android Development](https://developer.android.com/modern-android-development) patterns.
 
 This app uses [NewsAPI](https://newsapi.org/) to fetch news headlines from the API.
 

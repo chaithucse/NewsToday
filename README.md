@@ -18,5 +18,6 @@ This app uses [NewsAPI](https://newsapi.org/) to fetch news headlines from the A
 <img src="screenshots/headlines.png" width="250">  <img src="screenshots/sources.png" width="250">  <img src="screenshots/settings.png" width="250">
 
 # Follow Us
+  - Medium Articles: [Technical Articles](https://medium.com/@rchaitanya)
   - Subscribe to YouTube Channel: [Coding Lessons](https://www.youtube.com/channel/UCchOskJCqHj4NnhobV02ejQ)
   - Technical Blog: [Coder Articles](https://www.coderarticles.com/)
